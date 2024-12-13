@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Spatial Data Analysis | My Bookdown</title>
+  <meta name="description" content="This is an example of using the bookdown package for my final project. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Spatial Data Analysis | My Bookdown" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an example of using the bookdown package for my final project. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Spatial Data Analysis | My Bookdown" />
+  
+  <meta name="twitter:description" content="This is an example of using the bookdown package for my final project. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Spencer Zigler Soliz" />
+
+
+<meta name="date" content="2024-12-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-wrangling-and-visualization.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>My Introduction</a></li>
+<li class="chapter" data-level="1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html"><i class="fa fa-check"></i><b>1</b> API Calls, Functions, and Iterations</a>
+<ul>
+<li class="chapter" data-level="1.0.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#lesson-objectives"><i class="fa fa-check"></i><b>1.0.1</b> Lesson Objectives</a></li>
+<li class="chapter" data-level="1.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#apis"><i class="fa fa-check"></i><b>1.1</b> APIs</a></li>
+<li class="chapter" data-level="1.2" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#nps-visitation-data"><i class="fa fa-check"></i><b>1.2</b> NPS Visitation Data</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-1"><i class="fa fa-check"></i><b>1.2.1</b> Exercise #1</a></li>
+<li class="chapter" data-level="1.2.2" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-2"><i class="fa fa-check"></i><b>1.2.2</b> Exercise #2</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#functions"><i class="fa fa-check"></i><b>1.3</b> Functions</a></li>
+<li class="chapter" data-level="1.4" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#functionize-api-pulls"><i class="fa fa-check"></i><b>1.4</b> Functionize API Pulls</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-3"><i class="fa fa-check"></i><b>1.4.1</b> Exercise #3</a></li>
+<li class="chapter" data-level="1.4.2" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-4"><i class="fa fa-check"></i><b>1.4.2</b> Exercise #4</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#function-defaults"><i class="fa fa-check"></i><b>1.5</b> Function Defaults</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-5"><i class="fa fa-check"></i><b>1.5.1</b> Exercise #5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#iterations"><i class="fa fa-check"></i><b>1.6</b> Iterations</a></li>
+<li class="chapter" data-level="1.7" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#for-loops"><i class="fa fa-check"></i><b>1.7</b> For loops</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-6"><i class="fa fa-check"></i><b>1.7.1</b> Exercise #6</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#mapping"><i class="fa fa-check"></i><b>1.8</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="api-calls-functions-and-iterations.html"><a href="api-calls-functions-and-iterations.html#exercise-7"><i class="fa fa-check"></i><b>1.8.1</b> Exercise #7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling and Visualization</a>
+<ul>
+<li class="chapter" data-level="2.0.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#lesson-objectives-1"><i class="fa fa-check"></i><b>2.0.1</b> Lesson Objectives</a></li>
+<li class="chapter" data-level="2.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#pulling-in-necessary-packages-and-data-sets"><i class="fa fa-check"></i><b>2.1</b> Pulling in necessary packages and data sets</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercise-1-1"><i class="fa fa-check"></i><b>2.1.1</b> Exercise #1</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exploring-our-data"><i class="fa fa-check"></i><b>2.2</b> Exploring our data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercise-2-1"><i class="fa fa-check"></i><b>2.2.1</b> Exercise #2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#pivoting"><i class="fa fa-check"></i><b>2.3</b> Pivoting</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercise-3-1"><i class="fa fa-check"></i><b>2.3.1</b> Exercise #3</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#joining"><i class="fa fa-check"></i><b>2.4</b> Joining</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercise-4-1"><i class="fa fa-check"></i><b>2.4.1</b> Exercise #4</a></li>
+<li class="chapter" data-level="2.4.2" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercise-5-1"><i class="fa fa-check"></i><b>2.4.2</b> Exercise #5</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#spatial-data-formats"><i class="fa fa-check"></i><b>2.5</b> 1. Spatial Data Formats</a></li>
+<li class="chapter" data-level="2.6" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#import-and-manipulate-spatial-data"><i class="fa fa-check"></i><b>2.6</b> 2. Import and manipulate spatial data</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#vector-data"><i class="fa fa-check"></i><b>2.6.1</b> 2.1 Vector Data</a></li>
+<li class="chapter" data-level="2.6.2" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#tigris"><i class="fa fa-check"></i><b>2.6.2</b> <code>tigris</code></a></li>
+<li class="chapter" data-level="2.6.3" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#polygons"><i class="fa fa-check"></i><b>2.6.3</b> <strong>Polygons</strong></a></li>
+<li class="chapter" data-level="2.6.4" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#lines"><i class="fa fa-check"></i><b>2.6.4</b> <strong>Lines</strong></a></li>
+<li class="chapter" data-level="2.6.5" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#tmap"><i class="fa fa-check"></i><b>2.6.5</b> <code>tmap</code></a></li>
+<li class="chapter" data-level="2.6.6" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#sf"><i class="fa fa-check"></i><b>2.6.6</b> <code>sf</code></a></li>
+<li class="chapter" data-level="2.6.7" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#points"><i class="fa fa-check"></i><b>2.6.7</b> Points</a></li>
+<li class="chapter" data-level="2.6.8" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#coordinate-reference-systems"><i class="fa fa-check"></i><b>2.6.8</b> Coordinate Reference Systems</a></li>
+<li class="chapter" data-level="2.6.9" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#raster-data"><i class="fa fa-check"></i><b>2.6.9</b> 2.2 Raster Data</a></li>
+<li class="chapter" data-level="2.6.10" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#elevatr"><i class="fa fa-check"></i><b>2.6.10</b> <code>elevatr</code></a></li>
+<li class="chapter" data-level="2.6.11" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#terra"><i class="fa fa-check"></i><b>2.6.11</b> <code>terra</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#reading-and-writing-spatial-data"><i class="fa fa-check"></i><b>2.7</b> 3. Reading and Writing Spatial Data</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#writing-spatial-data"><i class="fa fa-check"></i><b>2.7.1</b> 3.1 Writing spatial data</a></li>
+<li class="chapter" data-level="2.7.2" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#rdata-files"><i class="fa fa-check"></i><b>2.7.2</b> 3.2 .RData Files</a></li>
+<li class="chapter" data-level="2.7.3" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#reading-spatial-data"><i class="fa fa-check"></i><b>2.7.3</b> 3.3 Reading Spatial Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="data-wrangling-and-visualization.html"><a href="data-wrangling-and-visualization.html#exercises"><i class="fa fa-check"></i><b>2.8</b> 4. Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Spatial Data Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#load-in-spatial-data"><i class="fa fa-check"></i><b>3.1</b> Load in spatial data</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#bonus-lesson"><i class="fa fa-check"></i><b>3.1.1</b> Bonus Lesson</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#distance-calculations"><i class="fa fa-check"></i><b>3.2</b> Distance Calculations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Exercise #1</a></li>
+<li class="chapter" data-level="3.2.2" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-2-2"><i class="fa fa-check"></i><b>3.2.2</b> Exercise #2</a></li>
+<li class="chapter" data-level="3.2.3" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-3-2"><i class="fa fa-check"></i><b>3.2.3</b> Exercise #3</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#buffers"><i class="fa fa-check"></i><b>3.3</b> Buffers</a></li>
+<li class="chapter" data-level="3.4" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#spatial-intersect"><i class="fa fa-check"></i><b>3.4</b> Spatial Intersect</a></li>
+<li class="chapter" data-level="3.5" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#raster-reclassification"><i class="fa fa-check"></i><b>3.5</b> Raster Reclassification</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-4-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercise 4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#extraction-statistics"><i class="fa fa-check"></i><b>3.6</b> Extraction Statistics</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-5-2"><i class="fa fa-check"></i><b>3.6.1</b> Exercise 5</a></li>
+<li class="chapter" data-level="3.6.2" data-path="spatial-data-analysis.html"><a href="spatial-data-analysis.html#exercise-6-1"><i class="fa fa-check"></i><b>3.6.2</b> Exercise 6</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">My Bookdown</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="spatial-data-analysis" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Spatial Data Analysis<a href="spatial-data-analysis.html#spatial-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the first lesson this week you were introduced to different spatial data types, various databases you can pull spatial data from and worked through importing, wrangling, and saving those spatial data types. Today we are going to dive deeper in spatial analyses in R.</p>
+<p>You have briefly used the <code>sf</code> and <code>terra</code> packages so far, but today we will be exploring them much more in depth using the wide range of spatial analysis operations they provide.</p>
+<p>You shouldn’t need to install any new packages for today, but need to load in all the necessary libraries:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="spatial-data-analysis.html#cb95-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span></code></pre></div>
+<div id="load-in-spatial-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Load in spatial data<a href="spatial-data-analysis.html#load-in-spatial-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will be working with some new datasets today that are already included in the ‘data/’ folder. These include:</p>
+<ul>
+<li><p>“spatDat.RData” : an .RData file that loads in the four objects:</p>
+<ul>
+<li><p><code>counties</code> : a multipolygon layer of Colorado counties (which we used in 01_spatial_intro.Rmd)</p></li>
+<li><p><code>rivers</code> : a polyline layer of all major rivers in Colorado</p></li>
+<li><p><code>occ</code> : a list of three dataframes that includes species occurrence data (i.e., point locations) for Elk, Yellow-bellied Marmot, and Western Tiger Salamander in Colorado retrieved from the <a href="https://www.gbif.org/">GBIF</a> database.</p></li>
+<li><p><code>snotel_data</code> : spatial point dataframe (i.e., <code>sf</code> object) of daily snow depth for 8 SNOTEL sites in Colorado</p></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="spatial-data-analysis.html#cb96-1" tabindex="-1"></a><span class="co">#load in all your vector data</span></span>
+<span id="cb96-2"><a href="spatial-data-analysis.html#cb96-2" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/spatDat.RData&quot;</span>)</span>
+<span id="cb96-3"><a href="spatial-data-analysis.html#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="spatial-data-analysis.html#cb96-4" tabindex="-1"></a><span class="co">#read in the elevation and landcover rasters</span></span>
+<span id="cb96-5"><a href="spatial-data-analysis.html#cb96-5" tabindex="-1"></a>landcover <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&quot;data/NLCD_CO.tif&quot;</span>)</span>
+<span id="cb96-6"><a href="spatial-data-analysis.html#cb96-6" tabindex="-1"></a></span>
+<span id="cb96-7"><a href="spatial-data-analysis.html#cb96-7" tabindex="-1"></a>elevation <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&quot;data/elevation.tif&quot;</span>)</span></code></pre></div>
+<div id="bonus-lesson" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Bonus Lesson<a href="spatial-data-analysis.html#bonus-lesson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All the above objects were retrieved and cleaned in R. The lesson plan in the ‘bonus/’ folder titled <strong>‘get_spatial_challenge.Rmd’</strong> is an assignment that tasks you with importing and cleaning the data that was saved in ‘spatDat.RData’. If you complete this challenge assignment fully you will get <em>up to 3 extra credit points</em>. Even if you don’t want to complete this challenge, it is worth your while to read and work through it!</p>
+</div>
+</div>
+<div id="distance-calculations" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Distance Calculations<a href="spatial-data-analysis.html#distance-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’re going to start off today with some distance calculations. Using our species occurrence data, say we want to know on average how far away is each species found from a major river, and compare that among species.</p>
+<p>Throughout today we are going to be mapping our spatial data to quickly inspect it and get a visual of the data’s extent and characteristics, so lets set our <code>tmap</code> mode to interactive.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="spatial-data-analysis.html#cb97-1" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span></code></pre></div>
+<p>First, our <code>occ</code> object is not in a spatial format. We first need to bind our dataframes into a single one, and convert it to an <code>sf</code> object using <code>st_as_sf()</code> :</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="spatial-data-analysis.html#cb98-1" tabindex="-1"></a>occ_sp <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(occ) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-2"><a href="spatial-data-analysis.html#cb98-2" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;decimalLongitude&quot;</span>, <span class="st">&quot;decimalLatitude&quot;</span>), <span class="at">crs =</span> <span class="dv">4236</span>)</span></code></pre></div>
+<p>We set the CRS to <code>4236</code>, which is the EPSG code for WGS84, the most commonly used CRS for GPS coordinates (But I also checked the GBIF metadata to make sure it was in fact WGS84).</p>
+<p>Quick view of all our points, colored by species:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="spatial-data-analysis.html#cb99-1" tabindex="-1"></a><span class="fu">qtm</span>(occ_sp, <span class="at">symbols.col =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<p>Now, calculating the distance to the nearest river involves point to line distance calculations, which we can perform with the <code>sf</code> package.</p>
+<p>Before performing any spatial operations, remember all of our spatial objects must be in the same CRS.</p>
+<div id="exercise-1-2" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Exercise #1<a href="spatial-data-analysis.html#exercise-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="spatial-data-analysis.html#cb100-1" tabindex="-1"></a><span class="fu">st_crs</span>(rivers) <span class="sc">==</span> <span class="fu">st_crs</span>(occ_sp)</span></code></pre></div>
+<p>The CRS of our objects does not match. Using what you learned in week one, conduct a spatial transformation to our <code>occ_sp</code> object to coerce it to the same CRS of our <code>rivers</code> object. Call the new object <code>occ_prj</code> and double check that <code>rivers</code> and our new occurrences object are in the same CRS after transforming</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="spatial-data-analysis.html#cb101-1" tabindex="-1"></a>occ_prj <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(occ_sp, <span class="fu">st_crs</span>(rivers))</span>
+<span id="cb101-2"><a href="spatial-data-analysis.html#cb101-2" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="spatial-data-analysis.html#cb101-3" tabindex="-1"></a><span class="fu">st_crs</span>(rivers) <span class="sc">==</span> <span class="fu">st_crs</span>(occ_prj)</span></code></pre></div>
+<p>Now lets visualize our rivers and occurrence data:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="spatial-data-analysis.html#cb102-1" tabindex="-1"></a><span class="fu">qtm</span>(rivers) <span class="sc">+</span></span>
+<span id="cb102-2"><a href="spatial-data-analysis.html#cb102-2" tabindex="-1"></a>  <span class="fu">qtm</span>(occ_prj, <span class="at">symbols.col =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<p>Our occurrence data set covers all of Colorado, but rivers are only for Larimer County. So, we have to first filter our points to Larimer County.</p>
+<p>Similar to <code>filter()</code> from the {tidyverse}, we can use <code>st_filter()</code> to perform a <em>spatial</em> filtering (i.e., we want to filer just the points that occur in Larimer County).</p>
+</div>
+<div id="exercise-2-2" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Exercise #2<a href="spatial-data-analysis.html#exercise-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use <code>?st_filter</code> to explore the use of the function, and then use it to filter our <code>occ_prj</code> points to Larimer county and call the new object <code>occ_larimer</code>.</p>
+<p><em>Note:</em> You will first need to create a spatial object of just Larimer county to use as a filter.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="spatial-data-analysis.html#cb103-1" tabindex="-1"></a>larimer <span class="ot">&lt;-</span> counties <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="spatial-data-analysis.html#cb103-2" tabindex="-1"></a>  <span class="fu">filter</span>(NAMELSAD <span class="sc">==</span> <span class="st">&quot;Larimer County&quot;</span>)</span>
+<span id="cb103-3"><a href="spatial-data-analysis.html#cb103-3" tabindex="-1"></a></span>
+<span id="cb103-4"><a href="spatial-data-analysis.html#cb103-4" tabindex="-1"></a>occ_larimer <span class="ot">&lt;-</span> <span class="fu">st_filter</span>(occ_prj, larimer)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="spatial-data-analysis.html#cb104-1" tabindex="-1"></a><span class="fu">qtm</span>(occ_larimer)</span></code></pre></div>
+<p>Great, now we just have species occurrences within Larimer County.</p>
+<p>Now for each point we want to calculate its distance to the nearest river. The most efficient way is to first find the nearest line feature for each point. We can do this with the <code>st_nearest_feature()</code> function.</p>
+<p>This function returns the index values (row number) of the river feature in the <code>rivers</code> spatial data frame that is closest in distance to each point. Here we are assigning these index values to a new column of our Larimer occurrences called ‘nearest_river’ that we will use later to calculate distances:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="spatial-data-analysis.html#cb105-1" tabindex="-1"></a>occ_larimer<span class="sc">$</span>nearest_river <span class="ot">&lt;-</span> <span class="fu">st_nearest_feature</span>(occ_larimer, rivers)</span></code></pre></div>
+<p>Now, for each point we can use the <code>st_distance()</code> function to calculate the distance to the nearest river feature, using the index value in our new “nearest_river” column. Adding <code>by_element = TRUE</code> is necessary to tell the function to perform the distance calculations by element (row), which we will fill into a new column “river_dist_m”.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="spatial-data-analysis.html#cb106-1" tabindex="-1"></a>occ_larimer<span class="sc">$</span>river_dist_m <span class="ot">&lt;-</span></span>
+<span id="cb106-2"><a href="spatial-data-analysis.html#cb106-2" tabindex="-1"></a>  <span class="fu">st_distance</span>(occ_larimer, rivers[occ_larimer<span class="sc">$</span>nearest_river, ], <span class="at">by_element =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Notice that the new column “river_dist_m” is more than just a numeric class, but a “units” class, specifying that the values are in meters.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="spatial-data-analysis.html#cb107-1" tabindex="-1"></a><span class="fu">str</span>(occ_larimer)</span></code></pre></div>
+</div>
+<div id="exercise-3-2" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Exercise #3<a href="spatial-data-analysis.html#exercise-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cool, now you have the distance to the nearest river (in meters) for each individual species occurrence, but you want the average distance for each species. Using what you know of the <code>dplyr</code> functions, calculate the species average distance, then make a bar plot to compare the averages among species:</p>
+<p><em>Hint</em>: remember that the new distance column is a ‘units’ data type will throw an error when you try to plot those values. You will need to make use of <code>mutate()</code> and <code>as.numeric</code> within your string of operations in order to complete task.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="spatial-data-analysis.html#cb108-1" tabindex="-1"></a>sp_avg_dist <span class="ot">&lt;-</span> occ_larimer <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href="spatial-data-analysis.html#cb108-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-3"><a href="spatial-data-analysis.html#cb108-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(river_dist_m, as.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb108-4"><a href="spatial-data-analysis.html#cb108-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">avg_dist =</span> <span class="fu">mean</span>(river_dist_m))</span>
+<span id="cb108-5"><a href="spatial-data-analysis.html#cb108-5" tabindex="-1"></a>  </span>
+<span id="cb108-6"><a href="spatial-data-analysis.html#cb108-6" tabindex="-1"></a>sp_avg_dist <span class="sc">%&gt;%</span> </span>
+<span id="cb108-7"><a href="spatial-data-analysis.html#cb108-7" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb108-8"><a href="spatial-data-analysis.html#cb108-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> avg_dist, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
+<span id="cb108-9"><a href="spatial-data-analysis.html#cb108-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb108-10"><a href="spatial-data-analysis.html#cb108-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Distance&quot;</span>,</span>
+<span id="cb108-11"><a href="spatial-data-analysis.html#cb108-11" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Average Distance to Nearest River by Species&quot;</span>)</span></code></pre></div>
+<p>Which species is, on average, found closest to a river?</p>
+<p><strong><em>The Western Tiger Salamander is found on average closest to a river.</em></strong></p>
+</div>
+</div>
+<div id="buffers" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Buffers<a href="spatial-data-analysis.html#buffers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Alternatively, say you want to know what percentage of species’ occurrences (points) were found within a specified distance of a river (calculated buffer). Here lets investigate how often each species is found within 100m of a river.</p>
+<p>To do this we can add a buffer around our line features and filter the points that fall within that buffer zone. We can use <code>st_buffer()</code> with a specified distance (default is meters since our <code>rivers</code> object uses ‘meters’ as its length unit, we can tell by checking the CRS with <code>st_crs()</code>)</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="spatial-data-analysis.html#cb109-1" tabindex="-1"></a>river_buffer <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(rivers, <span class="at">dist =</span> <span class="dv">100</span>)</span>
+<span id="cb109-2"><a href="spatial-data-analysis.html#cb109-2" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="spatial-data-analysis.html#cb109-3" tabindex="-1"></a><span class="fu">qtm</span>(river_buffer)</span></code></pre></div>
+<p>If you zoom in on the map you can now see a buffer around the rivers, and this new object is actually a polygon geometry type now instead of a line.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="spatial-data-analysis.html#cb110-1" tabindex="-1"></a>river_buffer</span></code></pre></div>
+</div>
+<div id="spatial-intersect" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Spatial Intersect<a href="spatial-data-analysis.html#spatial-intersect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can conduct spatial intersect operations using the function <code>st_intersects()</code>. This function checks if each occurrence intersects with the river buffer, and if so it returns an index value (row number) for the river feature it intersects. This function returns a list object for each occurrence, that will be empty if there are no intersections. We will add this as a column to our occurrence data set, and then create a binary yes/no river intersection column based on those results (is the list empty or not?).</p>
+<p>First look at what <code>st_intersects()</code> returns:</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="spatial-data-analysis.html#cb111-1" tabindex="-1"></a><span class="fu">st_intersects</span>(occ_larimer, river_buffer)</span></code></pre></div>
+<p>We see it is a list of the same length as our <code>occ_larimer</code> object, where each list element is either empty (no intersections) or the index number for the river buffer feature it intersects with. To add this as a new column in our <code>occ_larimer</code> data we run this:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="spatial-data-analysis.html#cb112-1" tabindex="-1"></a>occ_larimer<span class="sc">$</span>river_intersections <span class="ot">&lt;-</span> <span class="fu">st_intersects</span>(occ_larimer, river_buffer) </span></code></pre></div>
+<p>Now we can create a new column in <code>occ_larimer</code> called ‘river_100m’ that returns TRUE/FALSE if the buffer intersects with a river. We make use of <code>if_else()</code> and the <code>lengths()</code> function to check the length of each list element in each row, as the empty ones will return a length of 0. If the length is zero/empty, then we return FALSE meaning that occurrence was not found within 100m of a river.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="spatial-data-analysis.html#cb113-1" tabindex="-1"></a>occ_rivers <span class="ot">&lt;-</span> occ_larimer <span class="sc">%&gt;%</span> </span>
+<span id="cb113-2"><a href="spatial-data-analysis.html#cb113-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">river_100m =</span> <span class="fu">if_else</span>(<span class="fu">lengths</span>(river_intersections) <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code></pre></div>
+<p>Now we can calculate what percentage of occurrences are within 100 m of a river for each species using <code>dplyr</code> operations. Which species is most often found within 100m of a river?</p>
+<p><strong><em>Elk are most often found within 100m of a river.</em></strong></p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="spatial-data-analysis.html#cb114-1" tabindex="-1"></a>occ_rivers <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="spatial-data-analysis.html#cb114-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb114-3"><a href="spatial-data-analysis.html#cb114-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_occ =</span> <span class="fu">n</span>(), </span>
+<span id="cb114-4"><a href="spatial-data-analysis.html#cb114-4" tabindex="-1"></a>            <span class="at">total_river =</span> <span class="fu">sum</span>(river_100m <span class="sc">==</span> <span class="cn">TRUE</span>),</span>
+<span id="cb114-5"><a href="spatial-data-analysis.html#cb114-5" tabindex="-1"></a>            <span class="at">percent_river =</span> (<span class="fu">sum</span>(river_100m <span class="sc">==</span> <span class="cn">TRUE</span>)<span class="sc">/</span>total_occ)<span class="sc">*</span><span class="dv">100</span>) </span></code></pre></div>
+<hr>
+<div id="reflection" class="section level4 hasAnchor" number="3.4.0.1">
+<h4><span class="header-section-number">3.4.0.1</span> Reflection<a href="spatial-data-analysis.html#reflection" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This analysis is just for teaching purposes, why would you be cautious about these results for answering real research questions? Think about how we filtered everything to a political boundary, what’s wrong with this method?</p>
+<p><strong><em>Animals aren’t bound to political boundaries.</em></strong></p>
+</div>
+</div>
+<div id="raster-reclassification" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Raster Reclassification<a href="spatial-data-analysis.html#raster-reclassification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So far we’ve dealt with a bunch of vector data and associated analyses with the <code>sf</code> package. Now lets work through some raster data analysis using the <code>terra</code> package.</p>
+<p>First, lets explore the landcover raster by making a quick plot.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="spatial-data-analysis.html#cb115-1" tabindex="-1"></a><span class="fu">qtm</span>(landcover)</span></code></pre></div>
+<p>This land cover data set includes attributes (land cover classes) associated with raster values. This is because of the .aux auxiliary file paired with the .tif. in the ‘data/’ folder. Similar to shapefiles, this file provides metadata (in this case land cover class names) to the raster file.</p>
+<p>We can quickly view the frequency of each land cover type with the <code>freq()</code> function, where ‘count’ is the number of pixels in the raster of that landcover type.</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="spatial-data-analysis.html#cb116-1" tabindex="-1"></a><span class="fu">freq</span>(landcover)</span></code></pre></div>
+<div id="exercise-4-2" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Exercise 4<a href="spatial-data-analysis.html#exercise-4-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Create a bar chart of landcover frequency, and order the bars highest to lowest (see <a href="https://sebastiansauer.github.io/ordering-bars/">this resource</a> to guide you on sorting bars by a numeric variable/column). Also investigate the use of <code>coor_flip()</code> and how it might make your plot look better…</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="spatial-data-analysis.html#cb117-1" tabindex="-1"></a>land_freq <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(landcover, <span class="at">xy =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-2"><a href="spatial-data-analysis.html#cb117-2" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Class =</span> <span class="st">&quot;NLCD Land Cover Class&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb117-3"><a href="spatial-data-analysis.html#cb117-3" tabindex="-1"></a>  <span class="fu">count</span>(Class)</span>
+<span id="cb117-4"><a href="spatial-data-analysis.html#cb117-4" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="spatial-data-analysis.html#cb117-5" tabindex="-1"></a><span class="fu">ggplot</span>(land_freq, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Class, <span class="sc">-</span>n), <span class="at">y =</span> n, <span class="at">fill =</span> Class)) <span class="sc">+</span></span>
+<span id="cb117-6"><a href="spatial-data-analysis.html#cb117-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-7"><a href="spatial-data-analysis.html#cb117-7" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb117-8"><a href="spatial-data-analysis.html#cb117-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Frequency&quot;</span>,</span>
+<span id="cb117-9"><a href="spatial-data-analysis.html#cb117-9" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Land Cover Class&quot;</span>,</span>
+<span id="cb117-10"><a href="spatial-data-analysis.html#cb117-10" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Frequency of Land Cover by Class in Colorado&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-11"><a href="spatial-data-analysis.html#cb117-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb117-12"><a href="spatial-data-analysis.html#cb117-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p>Say we want to explore some habitat characteristics of our species of interest, and we are specifically interested in forest cover. We can use raster reclassification to create a new layer of just forest types in Colorado.</p>
+<p>Since rasters are technically matrices, we can using <strong>indexing</strong> and change values quickly using matrix operations. Given this particular raster uses character names associated with values (thanks to the .aux file!), we can index by those names.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="spatial-data-analysis.html#cb118-1" tabindex="-1"></a><span class="co">#first assign landcover to a new object name so we can manipulate it while keeping the original</span></span>
+<span id="cb118-2"><a href="spatial-data-analysis.html#cb118-2" tabindex="-1"></a>forest <span class="ot">&lt;-</span> landcover</span>
+<span id="cb118-3"><a href="spatial-data-analysis.html#cb118-3" tabindex="-1"></a></span>
+<span id="cb118-4"><a href="spatial-data-analysis.html#cb118-4" tabindex="-1"></a><span class="co">#where the raster equals any of the forest categories, set that value to 1</span></span>
+<span id="cb118-5"><a href="spatial-data-analysis.html#cb118-5" tabindex="-1"></a>forest[forest <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Deciduous Forest&quot;</span>, <span class="st">&quot;Evergreen Forest&quot;</span>, <span class="st">&quot;Mixed Forest&quot;</span>)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb118-6"><a href="spatial-data-analysis.html#cb118-6" tabindex="-1"></a></span>
+<span id="cb118-7"><a href="spatial-data-analysis.html#cb118-7" tabindex="-1"></a><span class="co">#SPELLING IS IMPORTANT</span></span>
+<span id="cb118-8"><a href="spatial-data-analysis.html#cb118-8" tabindex="-1"></a></span>
+<span id="cb118-9"><a href="spatial-data-analysis.html#cb118-9" tabindex="-1"></a><span class="co">#now set all non forest pixels to NA</span></span>
+<span id="cb118-10"><a href="spatial-data-analysis.html#cb118-10" tabindex="-1"></a>forest[forest <span class="sc">!=</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>Now plot the new forest layer to get a quick sense if it looks accurate or not.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="spatial-data-analysis.html#cb119-1" tabindex="-1"></a><span class="fu">plot</span>(forest)</span></code></pre></div>
+</div>
+</div>
+<div id="extraction-statistics" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Extraction Statistics<a href="spatial-data-analysis.html#extraction-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When we want to summarize raster values for certain shapes (points, polygons, etc), the <code>extract()</code> function from the <code>terra</code> package helps us do that.</p>
+<p>Say we want to find out the most common land cover type each of our species is found in. We can use <code>extract()</code> to get the landcover value from the raster at each of our occurrence points, and then do some summary statistics.</p>
+<p>Within this function, the first element is the raster you want to get values from, and the second element is the spatial layer you want to extract values at. Here we will use our <code>landcover</code> raster layer and the <code>occ_prj</code> object to extract values for occurrences across Colorado.</p>
+<p>First, we need to project our landcover raster to the CRS of our occurrences, otherwise the operation will only return NAs.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="spatial-data-analysis.html#cb120-1" tabindex="-1"></a><span class="co"># project the landcover layer</span></span>
+<span id="cb120-2"><a href="spatial-data-analysis.html#cb120-2" tabindex="-1"></a>landcover_prj <span class="ot">&lt;-</span> <span class="fu">project</span>(landcover, <span class="fu">crs</span>(occ_prj))</span>
+<span id="cb120-3"><a href="spatial-data-analysis.html#cb120-3" tabindex="-1"></a></span>
+<span id="cb120-4"><a href="spatial-data-analysis.html#cb120-4" tabindex="-1"></a><span class="fu">extract</span>(landcover_prj, occ_prj)</span></code></pre></div>
+<p>Notice that this returns a 2 column data frame, with an ID for each feature (occurrence) and the extracted raster value in the second column. We can actually use <code>extract()</code> within <code>mutate()</code> to add the values as a new column to our occurrences data frame so we can do further summary statistics.</p>
+<p>However, since <code>extract()</code> returns a 2 column data frame, it will nest this into a single column in the <code>occ_prj</code> data frame. To separate this into two separate columns we can use <code>unnest()</code> :</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="spatial-data-analysis.html#cb121-1" tabindex="-1"></a>occ_landcover <span class="ot">&lt;-</span> occ_prj <span class="sc">%&gt;%</span></span>
+<span id="cb121-2"><a href="spatial-data-analysis.html#cb121-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">common_landcover =</span> <span class="fu">extract</span>(landcover_prj, occ_prj)) <span class="sc">%&gt;%</span></span>
+<span id="cb121-3"><a href="spatial-data-analysis.html#cb121-3" tabindex="-1"></a>  <span class="fu">unnest</span>(common_landcover) <span class="sc">%&gt;%</span> </span>
+<span id="cb121-4"><a href="spatial-data-analysis.html#cb121-4" tabindex="-1"></a>  <span class="co">#lets rename the land cover column which is now called &quot;NLCD Land Cover Class&quot;</span></span>
+<span id="cb121-5"><a href="spatial-data-analysis.html#cb121-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">common_landcover =</span> <span class="st">&quot;NLCD Land Cover Class&quot;</span>)</span></code></pre></div>
+<p>Now, we can find the most common land cover type for each species, using some tidyverse wrangling. Note the use of <code>st_drop_geometry()</code>, this reverts the sf object back to an original data frame, which is required for some tidyverse operations.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="spatial-data-analysis.html#cb122-1" tabindex="-1"></a>occ_landcover <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="spatial-data-analysis.html#cb122-2" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> <span class="co"># this converts the data back to a dataframe, required for some tidyverse operations</span></span>
+<span id="cb122-3"><a href="spatial-data-analysis.html#cb122-3" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb122-4"><a href="spatial-data-analysis.html#cb122-4" tabindex="-1"></a>  <span class="fu">count</span>(common_landcover) <span class="sc">%&gt;%</span> </span>
+<span id="cb122-5"><a href="spatial-data-analysis.html#cb122-5" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which.max</span>(n)) <span class="co">#returns the row with the highest count &quot;n&quot;</span></span></code></pre></div>
+<p>We can also use <code>extract()</code> to extract raster values within polygons, but here must supply some function of how to summarize all the values within each polygon. For this example, lets find the most common landcover type in each Colorado county.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="spatial-data-analysis.html#cb123-1" tabindex="-1"></a>county_landcover <span class="ot">&lt;-</span> </span>
+<span id="cb123-2"><a href="spatial-data-analysis.html#cb123-2" tabindex="-1"></a>  counties <span class="sc">%&gt;%</span></span>
+<span id="cb123-3"><a href="spatial-data-analysis.html#cb123-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">landcover =</span> <span class="fu">extract</span>(landcover_prj, counties, <span class="at">fun =</span> <span class="st">&quot;modal&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb123-4"><a href="spatial-data-analysis.html#cb123-4" tabindex="-1"></a>  <span class="fu">unnest</span>(landcover) <span class="sc">%&gt;%</span></span>
+<span id="cb123-5"><a href="spatial-data-analysis.html#cb123-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">value =</span> <span class="st">&quot;NLCD Land Cover Class&quot;</span>) <span class="co">#renaming this helps us perform a join later on...</span></span></code></pre></div>
+<p>Uh oh, this gives us the raw pixel values instead of the land cover classes. We can get a table of value - class pairs by using the <code>cats()</code> function:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="spatial-data-analysis.html#cb124-1" tabindex="-1"></a>classes <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cats</span>(landcover)) <span class="co">#coerce to a data frame because cats() actually returns it as a list</span></span></code></pre></div>
+<p>Value and NLCD.Land.Cover.Class are our cell value - class pairs. Now we want to join this to our <code>county_landcover</code> object to get the actual land cover name.</p>
+<div id="exercise-5-2" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Exercise 5<a href="spatial-data-analysis.html#exercise-5-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Perform the appropriate <code>*_join</code> operation to tie our <code>county_landcover</code> and <code>classes</code> data frames together. Then make a map of the counties each colored/filled by the most common NLCD land cover class.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="spatial-data-analysis.html#cb125-1" tabindex="-1"></a>county_landcover_join <span class="ot">&lt;-</span> <span class="fu">right_join</span>(classes, county_landcover)</span>
+<span id="cb125-2"><a href="spatial-data-analysis.html#cb125-2" tabindex="-1"></a></span>
+<span id="cb125-3"><a href="spatial-data-analysis.html#cb125-3" tabindex="-1"></a>county_landcover_join <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(county_landcover_join,</span>
+<span id="cb125-4"><a href="spatial-data-analysis.html#cb125-4" tabindex="-1"></a>                                  <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;INTPTLON&quot;</span>, <span class="st">&quot;INTPTLAT&quot;</span>),</span>
+<span id="cb125-5"><a href="spatial-data-analysis.html#cb125-5" tabindex="-1"></a>                                  <span class="at">crs =</span> <span class="st">&#39;NAD83&#39;</span>)</span>
+<span id="cb125-6"><a href="spatial-data-analysis.html#cb125-6" tabindex="-1"></a></span>
+<span id="cb125-7"><a href="spatial-data-analysis.html#cb125-7" tabindex="-1"></a>county_landcover_summary <span class="ot">&lt;-</span> <span class="fu">st_join</span>(counties, county_landcover_join)</span>
+<span id="cb125-8"><a href="spatial-data-analysis.html#cb125-8" tabindex="-1"></a></span>
+<span id="cb125-9"><a href="spatial-data-analysis.html#cb125-9" tabindex="-1"></a><span class="fu">qtm</span>(county_landcover_summary, <span class="at">fill =</span> <span class="st">&quot;NLCD.Land.Cover.Class&quot;</span>)</span></code></pre></div>
+</div>
+<div id="exercise-6-1" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Exercise 6<a href="spatial-data-analysis.html#exercise-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Find the average elevation each species occurs at (for all Colorado occurrences). Which species is, on average, found at the highest elevations?</p>
+<p><em>Hints</em>: Use the <code>elevation</code> and <code>occ_prj</code> objects we have created or read in above. Remember to check the CRS and perform a spatial transformation if necessary! All parts needed to answer this question have been introduced in this lesson plan.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="spatial-data-analysis.html#cb126-1" tabindex="-1"></a><span class="fu">st_crs</span>(elevation) <span class="sc">==</span> <span class="fu">st_crs</span>(occ_prj)</span>
+<span id="cb126-2"><a href="spatial-data-analysis.html#cb126-2" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="spatial-data-analysis.html#cb126-3" tabindex="-1"></a>elevation_prj <span class="ot">&lt;-</span> <span class="fu">project</span>(elevation, <span class="fu">crs</span>(occ_prj))</span>
+<span id="cb126-4"><a href="spatial-data-analysis.html#cb126-4" tabindex="-1"></a></span>
+<span id="cb126-5"><a href="spatial-data-analysis.html#cb126-5" tabindex="-1"></a>occ_elevation <span class="ot">&lt;-</span> occ_prj <span class="sc">%&gt;%</span></span>
+<span id="cb126-6"><a href="spatial-data-analysis.html#cb126-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">elevation_found =</span> <span class="fu">extract</span>(elevation_prj, occ_prj)) <span class="sc">%&gt;%</span></span>
+<span id="cb126-7"><a href="spatial-data-analysis.html#cb126-7" tabindex="-1"></a>  <span class="fu">unnest</span>(elevation_found) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-8"><a href="spatial-data-analysis.html#cb126-8" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-9"><a href="spatial-data-analysis.html#cb126-9" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb126-10"><a href="spatial-data-analysis.html#cb126-10" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-11"><a href="spatial-data-analysis.html#cb126-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">elevation_avg =</span> <span class="fu">mean</span>(Elevation))</span>
+<span id="cb126-12"><a href="spatial-data-analysis.html#cb126-12" tabindex="-1"></a></span>
+<span id="cb126-13"><a href="spatial-data-analysis.html#cb126-13" tabindex="-1"></a><span class="fu">print</span>(occ_elevation)</span></code></pre></div>
+<p><strong><em>Yellow-bellied Marmots are found, on average, at a higher elevation than both Elk and Western Tiger Salamander.</em></strong></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling-and-visualization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
